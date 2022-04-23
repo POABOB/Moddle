@@ -1,0 +1,510 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Moodle 後端API Document",
+    "description": ""
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "User",
+      "description": "使用者相關API"
+    },
+    {
+      "name": "Game",
+      "description": "遊戲相關API"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey",
+      "description": "後端驗證的JWT"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/user/info": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "使用者資訊API",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "王小明"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "a@gmail.com"
+                    },
+                    "totalScore": {
+                      "type": "number",
+                      "example": 0
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "403": {
+            "description": "請重新登入!"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/api/user/statistic": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "使用者紀錄API",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "history_id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "date": {
+                        "type": "string",
+                        "example": "2020-05-05"
+                      },
+                      "score": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "times": {
+                        "type": "number",
+                        "example": 1
+                      }
+                    }
+                  }
+                },
+                "self_rank": {
+                  "type": "object",
+                  "properties": {
+                    "rank": {
+                      "type": "number",
+                      "example": 854
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "王小明"
+                    },
+                    "totalScore": {
+                      "type": "number",
+                      "example": 5
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "403": {
+            "description": "請重新登入!"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/api/user/login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "登入API",
+        "description": "",
+        "parameters": [
+          {
+            "name": "帳密資訊",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "a@gmail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "a"
+                }
+              },
+              "required": [
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "登入成功!"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "201": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "登入失敗!"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/api/user/register": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "註冊API",
+        "description": "",
+        "parameters": [
+          {
+            "name": "註冊資訊",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "a@gmail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "a"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "王小明"
+                }
+              },
+              "required": [
+                "email",
+                "password",
+                "name"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "註冊成功!"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "201": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "註冊失敗!"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/api/user/logout": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "登出API",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "登出成功!"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "201": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "登出失敗!"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/api/user/google": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "GOOGLE登入API(直接點連結)",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/user/google/callback": {
+      "get": {
+        "summary": "GOOGLE跳轉API(不用理他)",
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api/user/facebook": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "FB登入API(直接點連結)",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/user/facebook/callback": {
+      "get": {
+        "summary": "FB跳轉API(不用理他)",
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api/game/ranks": {
+      "get": {
+        "tags": [
+          "Game"
+        ],
+        "summary": "遊戲排行榜API",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "rank": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "陳小春"
+                      },
+                      "totalScore": {
+                        "type": "number",
+                        "example": 555
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/game/check/answer": {
+      "post": {
+        "tags": [
+          "Game"
+        ],
+        "summary": "確認答案API",
+        "description": "",
+        "parameters": [
+          {
+            "name": "答案",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "answer": {
+                  "type": "string",
+                  "example": "poops!"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "true_index": {
+                      "type": "array",
+                      "example": [
+                        0,
+                        1,
+                        0,
+                        1,
+                        0,
+                        1
+                      ],
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "remaining_times": {
+                      "type": "number",
+                      "example": 4
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "201": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "今天已超過提交次數!"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "Created"
+          },
+          "403": {
+            "description": "請重新登入!"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    }
+  }
+}

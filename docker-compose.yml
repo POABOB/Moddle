@@ -1,0 +1,27 @@
+version: '3'
+services:
+    mysql:
+        image: mariadb:10.4
+        restart: always
+        environment:
+            - MYSQL_DATABASE=shortURL
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=root
+        command: --init-file /data/application/init.sql
+        ports:
+            - "3306:3306"
+        volumes:
+            - "./data/db/mysql:/var/lib/mysql"
+            - ./init.sql:/data/application/init.sql
+    # nodejs:
+    #     build: .
+    #     restart: always
+    #     command: npm run dev
+    #     volumes:
+    #         - .:/app
+    #         - /app/node_modules
+    #     ports:
+    #         - "80:80"
+    #     depends_on:
+    #         - mysql
