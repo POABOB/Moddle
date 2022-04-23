@@ -4,7 +4,6 @@ log/*
 core/config/database.php
 node_modules
 public/*
-static/*
 index.php
 *.zip
 .DS_Store
