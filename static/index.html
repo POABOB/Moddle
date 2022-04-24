@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首頁</title>
+</head>
+<body>
+    <h1>首頁</h1>
+    <p id="token"></p>
+    <p>OR</p>
+    <a href="/login.html">登入</a>
+    <script>
+        // 獲取URL JWT token
+        function getQueryVariable(variable){
+            const query = window.location.search.substring(1);
+            const vars = query.split("&");
+            for (let i=0;i<vars.length;i++) {
+                    const pair = vars[i].split("=");
+                    if(pair[0] == variable){return pair[1];}
+            }
+            return(false)
+        }
+        // 首頁檢查PARAM有無token，有的話就代表有登入
+        // 可以放入HEADER的Authorization
+        // 格式 Authorization: Bearer <token>
+        const token = getQueryVariable('token')
+        if(token !== false) {
+            // 存入localStorage，放入header
+            document.getElementById('token').textContent = token
+            
+        } else {
+            // 查看localStorage是否有登入
+            document.getElementById('token').textContent = '目前沒有token，請查找localStorage'
+        }
+    </script>
+</body>
+</html>

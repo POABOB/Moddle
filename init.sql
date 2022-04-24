@@ -12,15 +12,15 @@ CREATE TABLE IF NOT EXISTS `Users` (
 
 CREATE TABLE IF NOT EXISTS `History` (
   `history_id` int PRIMARY KEY AUTO_INCREMENT,
-  `date` int,
+  `date` varchar(10),
   `score` tinyint,
   `times` tinyint,
   `user_id` int
 );
 
-CREATE TABLE IF NOT EXISTS `vocabulary` (
-  `v_id` int PRIMARY KEY AUTO_INCREMENT,
-  `value` varchar(64)
-);
+-- CREATE TABLE IF NOT EXISTS `vocabulary` (
+--   `v_id` int PRIMARY KEY AUTO_INCREMENT,
+--   `value` varchar(64)
+-- );
 
 ALTER TABLE IF NOT EXISTS `History` ADD FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`);

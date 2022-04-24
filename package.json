@@ -19,13 +19,17 @@
   },
   "homepage": "https://github.com/POABOB/Wordle#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "express": "^4.17.3",
+    "js-md5": "^0.7.3",
+    "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
     "passport": "^0.5.2",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth": "^2.0.0",
     "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
     "swagger-autogen": "^2.21.1",
     "swagger-ui-express": "^4.3.0"
   },

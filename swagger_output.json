@@ -21,11 +21,12 @@
     "http"
   ],
   "securityDefinitions": {
-    "Bearer": {
+    "bearerAuth": {
       "in": "header",
       "name": "Authorization",
       "type": "apiKey",
-      "description": "後端驗證的JWT"
+      "scheme": "bearer",
+      "bearerFormat": "JWT"
     }
   },
   "consumes": [
@@ -72,13 +73,13 @@
               }
             }
           },
-          "403": {
+          "401": {
             "description": "請重新登入!"
           }
         },
         "security": [
           {
-            "apiKeyAuth": []
+            "bearerAuth": []
           }
         ]
       }
@@ -144,13 +145,13 @@
               }
             }
           },
-          "403": {
+          "401": {
             "description": "請重新登入!"
           }
         },
         "security": [
           {
-            "apiKeyAuth": []
+            "bearerAuth": []
           }
         ]
       }
@@ -202,6 +203,7 @@
             }
           },
           "201": {
+            "description": "Created",
             "schema": {
               "type": "object",
               "properties": {
@@ -213,8 +215,7 @@
               "xml": {
                 "name": "main"
               }
-            },
-            "description": "Created"
+            }
           }
         }
       }
@@ -284,6 +285,9 @@
               }
             },
             "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -332,17 +336,10 @@
     },
     "/api/user/google": {
       "get": {
-        "tags": [
-          "User"
-        ],
         "summary": "GOOGLE登入API(直接點連結)",
         "description": "",
         "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
+        "responses": {}
       }
     },
     "/api/user/google/callback": {
@@ -355,17 +352,10 @@
     },
     "/api/user/facebook": {
       "get": {
-        "tags": [
-          "User"
-        ],
         "summary": "FB登入API(直接點連結)",
         "description": "",
         "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
+        "responses": {}
       }
     },
     "/api/user/facebook/callback": {
@@ -406,6 +396,10 @@
                       "totalScore": {
                         "type": "number",
                         "example": 555
+                      },
+                      "user_id": {
+                        "type": "number",
+                        "example": 1
                       }
                     }
                   }
@@ -433,10 +427,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "user_id": {
-                  "type": "number",
-                  "example": 1
-                },
                 "answer": {
                   "type": "string",
                   "example": "poops!"
@@ -480,28 +470,28 @@
               }
             }
           },
-          "201": {
+          "400": {
+            "description": "不符合拼字規則!",
             "schema": {
               "type": "object",
               "properties": {
                 "message": {
                   "type": "string",
-                  "example": "今天已超過提交次數!"
+                  "example": "你已經用完本日次數!"
                 }
               },
               "xml": {
                 "name": "main"
               }
-            },
-            "description": "Created"
+            }
           },
-          "403": {
+          "401": {
             "description": "請重新登入!"
           }
         },
         "security": [
           {
-            "apiKeyAuth": []
+            "bearerAuth": []
           }
         ]
       }

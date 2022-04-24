@@ -25,11 +25,19 @@ const doc = {
         }
     ],
     securityDefinitions: {
-        Bearer: {
+        // Bearer: {
+        //     in: "header",
+        //     name: "Authorization",
+        //     type: "apiKey",
+        //     scheme: 'bearer',
+        //     description: "後端驗證的JWT"
+        // }
+        bearerAuth: {
             in: "header",
             name: "Authorization",
             type: "apiKey",
-            description: "後端驗證的JWT"
+            scheme: 'bearer',
+            bearerFormat: 'JWT'
         }
     },         // by default: empty object
     definitions: { }                  // by default: empty object

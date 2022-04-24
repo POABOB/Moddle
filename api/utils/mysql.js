@@ -1,9 +1,10 @@
 const mysql = require('mysql');
 
+require('dotenv').config()
 //不使用箭頭函數原因是因為不能使用this
 module.exports = {
 	config: {
-        host: process.env.HOST,
+        host: process.env.MYSQL_CONF_HOST,
 		user: process.env.MYSQL_CONF_USER,
 		password: process.env.MYSQL_CONF_PASSWORD,
 		port: process.env.MYSQL_CONF_PORT,
