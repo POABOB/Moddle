@@ -6,7 +6,7 @@ const endpointsFiles = ['./api/main.js']; // 要指向的 API，通常使用 Exp
 const doc = {
     info: {
         "version": "1.0",                // by default: "1.0.0"
-        "title": "Moodle 後端API Document",                  // by default: "REST API"
+        "title": "Wordle 後端API Document",                  // by default: "REST API"
         "description": ""             // by default: ""
     },
     host: process.env.BASE_SERVER_URL + ':' + process.env.PORT,                         // by default: "localhost:3000"
